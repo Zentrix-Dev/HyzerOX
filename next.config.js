@@ -1,12 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone', // Critical for Docker/Cloudflare flexibility
+  output: 'standalone', 
   images: {
-    remotePatterns: [], // Add remote CDNs here if needed
-  },
-  experimental: {
-    optimizeCss: true,
+    remotePatterns: [], 
   }
+  // Removed the experimental block
 };
 
 module.exports = nextConfig;

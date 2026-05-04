@@ -1,0 +1,7 @@
+name = "hyzerox-frontend"
+compatibility_date = "2024-10-24"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
+
+[env.production]
+# Add production KV, D1, or environment variables here if bridging a backend later

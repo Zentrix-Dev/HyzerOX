@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-base: #FAFAFA;
+    --bg-surface: #FFFFFF;
+    --bg-elevated: #F0F0F0;
+    --accent-primary: #0099BB;
+    --accent-secondary: #6320D9;
+    --text-primary: #0A0A0A;
+    --text-muted: #555555;
+    --border-color: rgba(0, 0, 0, 0.08);
+  }
+
+  .dark {
+    --bg-base: #0A0A0A;
+    --bg-surface: #111111;
+    --bg-elevated: #1A1A1A;
+    --accent-primary: #00E5FF;
+    --accent-secondary: #7B2FFF;
+    --text-primary: #F5F5F5;
+    --text-muted: #888888;
+    --border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-[var(--bg-surface)] bg-opacity-70 backdrop-blur-md border border-[var(--border-color)];
+  }
+}

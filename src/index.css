@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* The rest of your CSS below */
 @layer base {
   body {
     @apply antialiased selection:bg-accent selection:text-white;

@@ -167,14 +167,14 @@ export default function Home() {
             
             {/* Dark Mode Logo */}
             <img 
-              src="/logos/hyzerox-white.png" 
+              src="/logos/hyzerox-black.png" 
               alt="HyzerOX" 
               className="w-3/5 max-w-[280px] object-contain hidden dark:block drop-shadow-[0_0_25px_rgba(255,255,255,0.15)] group-hover:scale-105 transition-transform duration-700 relative z-10" 
             />
             
             {/* Light Mode Logo */}
             <img 
-              src="/logos/hyzerox-black.png" 
+              src="/logos/hyzerox-white.png" 
               alt="HyzerOX" 
               className="w-3/5 max-w-[280px] object-contain block dark:hidden drop-shadow-[0_0_25px_rgba(0,0,0,0.15)] group-hover:scale-105 transition-transform duration-700 relative z-10" 
             />

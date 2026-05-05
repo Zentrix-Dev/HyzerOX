@@ -63,7 +63,7 @@ export default function Footer() {
         <div className="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-textMuted">
           <p>© {new Date().getFullYear()} HyzerOX. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <span>Powered by Next.js & Cloudflare</span>
+            <span>Powered by HyzerOX Team & DZD</span>
           </div>
         </div>
       </div>

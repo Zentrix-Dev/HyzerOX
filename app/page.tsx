@@ -61,16 +61,37 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* 2. TECH STACK MARQUEE (New Feature) */}
-      <section className="w-full border-y border-border bg-surface/50 backdrop-blur-sm py-8 overflow-hidden flex items-center">
-        <div className="max-w-7xl mx-auto px-6 w-full flex flex-col md:flex-row items-center justify-between gap-8 opacity-70">
-          <p className="text-sm font-bold text-textMuted tracking-widest uppercase whitespace-nowrap">Powered By</p>
-          <div className="flex gap-12 text-textMain font-heading font-bold text-xl md:text-2xl">
-            {/* Placeholders for real SVG logos */}
-            <span>AMD Ryzen™</span>
-            <span>Cloudflare</span>
-            <span>NVMe Gen4</span>
-            <span>DDoS Guard</span>
+      {/* 2. TECH STACK MARQUEE */}
+      <section className="w-full border-y border-border bg-surface/50 backdrop-blur-sm py-6 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 w-full flex flex-col md:flex-row items-center gap-6 md:gap-12 opacity-80">
+          <p className="text-sm font-bold text-textMuted tracking-widest uppercase whitespace-nowrap shrink-0">
+            Powered By
+          </p>
+          
+          {/* Infinite Marquee Container */}
+          <div 
+            className="relative flex overflow-hidden w-full"
+            style={{ WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)", maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)" }}
+          >
+            {/* We use two identical arrays mapped for a seamless infinite loop */}
+            <motion.div 
+              className="flex items-center gap-8 md:gap-12 whitespace-nowrap min-w-max"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ duration: 25, ease: "linear", repeat: Infinity }}
+            >
+              {[
+                "AMD Ryzen™", "Cloudflare", "NVMe Gen4", "DDoS Guard", "Vercel", "Folia", "React",
+                "AMD Ryzen™", "Cloudflare", "NVMe Gen4", "DDoS Guard", "Vercel", "Folia", "React"
+              ].map((tech, i) => (
+                <div key={i} className="flex items-center gap-8 md:gap-12">
+                  <span className="text-textMain font-heading font-bold text-lg md:text-xl tracking-wide">
+                    {tech}
+                  </span>
+                  {/* Diagonal Separator Line */}
+                  <div className="w-[2px] h-6 bg-border rotate-12" />
+                </div>
+              ))}
+            </motion.div>
           </div>
         </div>
       </section>
@@ -103,7 +124,7 @@ export default function Home() {
                     <product.icon className="w-7 h-7 text-primary group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <h3 className="font-heading text-xl font-bold mb-3 text-textMain">{product.title}</h3>
-                  <p className="text-textMuted text-sm leading-relaxed">{product.desc}</p>
+                  <p className="text-textMuted text-sm leading-relaxed flex-grow">{product.desc}</p>
                 </div>
               </Link>
             </motion.div>
@@ -111,7 +132,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* 4. GLOBAL NETWORK / FEATURES (New Feature) */}
+      {/* 4. GLOBAL NETWORK / FEATURES */}
       <section className="w-full bg-elevated/50 border-y border-border py-24">
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
@@ -172,7 +193,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* 6. BOTTOM CTA BANNER (New Feature) */}
+      {/* 6. BOTTOM CTA BANNER */}
       <section className="w-full max-w-5xl mx-auto px-6 pb-32">
         <motion.div 
           className="relative rounded-2xl p-[1px] overflow-hidden group"
@@ -193,5 +214,5 @@ export default function Home() {
 
     </div>
   );
-              }
+          }
           

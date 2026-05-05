@@ -44,9 +44,9 @@ export default function Home() {
           </motion.div>
           
           <motion.h1 variants={itemVariants} className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-textMain tracking-tight">
-            Forge Your <br className="hidden md:block" />
+            Deploy Your <br className="hidden md:block" />
             <span className="text-cyan-400">
-              Cloud Here!.
+              Cloud Here!
             </span>
           </motion.h1>
           

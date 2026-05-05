@@ -1,8 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
-import { Server, Cuboid, Bot, Gamepad2, Shield, Zap, Globe, ArrowRight, Code, Users } from "lucide-react";
+import { Server, Cuboid, Bot, Gamepad2, Shield, Zap, ArrowRight, Globe } from "lucide-react";
 
 // Animation Variants for staggering
 const containerVariants = {
@@ -24,7 +23,7 @@ export default function Home() {
       
       {/* 1. HERO SECTION */}
       <section className="w-full max-w-7xl mx-auto px-6 py-24 md:py-32 text-center relative min-h-[70vh] flex flex-col justify-center">
-        {/* Animated Watermark - Adapts to Light/Dark automatically via opacity */}
+        {/* Animated Watermark */}
         <motion.div 
           className="absolute inset-0 z-[-1] flex items-center justify-center pointer-events-none opacity-[0.03] dark:opacity-5"
           animate={{ rotate: 360, scale: [1, 1.05, 1] }}
@@ -74,21 +73,19 @@ export default function Home() {
             className="relative flex overflow-hidden w-full"
             style={{ WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)", maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)" }}
           >
-            {/* We use two identical arrays mapped for a seamless infinite loop */}
             <motion.div 
               className="flex items-center gap-8 md:gap-12 whitespace-nowrap min-w-max"
               animate={{ x: ["0%", "-50%"] }}
               transition={{ duration: 25, ease: "linear", repeat: Infinity }}
             >
               {[
-                "AMD Ryzen™", "Cloudflare", "NVMe Gen4", "DDoS Guard", "Vercel", "Folia", "React",
-                "AMD Ryzen™", "Cloudflare", "NVMe Gen4", "DDoS Guard", "Vercel", "Folia", "React"
+                "AMD Ryzen™", "NVMe Gen4", "DDoS Guard", "Folia", "Pterodactyl", "Linux",
+                "AMD Ryzen™", "NVMe Gen4", "DDoS Guard", "Folia", "Pterodactyl", "Linux"
               ].map((tech, i) => (
                 <div key={i} className="flex items-center gap-8 md:gap-12">
                   <span className="text-textMain font-heading font-bold text-lg md:text-xl tracking-wide">
                     {tech}
                   </span>
-                  {/* Diagonal Separator Line */}
                   <div className="w-[2px] h-6 bg-border rotate-12" />
                 </div>
               ))}
@@ -117,7 +114,6 @@ export default function Home() {
             <motion.div key={i} variants={itemVariants} className="h-full">
               <Link href={`/products/${product.title.toLowerCase().replace(' ', '-')}`} 
                     className="glass-panel p-8 rounded-2xl flex flex-col h-full relative overflow-hidden group hover:border-primary transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-                {/* Glow effect on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 
                 <div className="relative z-10">
@@ -133,7 +129,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* 4. GLOBAL NETWORK / FEATURES */}
+      {/* 4. GLOBAL NETWORK / BRAND GRAPHIC SECTION */}
       <section className="w-full bg-elevated/50 border-y border-border py-24">
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
@@ -157,44 +153,27 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* AbstractMap Graphic (Removed) */}
-          {/* HyzerOX Logo Panel (New) */}
+          {/* Replaced Globe with Dynamic Theme Logo */}
           <motion.div 
-            className="relative rounded-2xl p-10 flex flex-col items-center justify-center h-[400px] overflow-hidden glass-panel group transition-all duration-300 hover:border-primary/50 hover:-translate-y-2 hover:shadow-xl"
+            className="relative h-[400px] glass-panel rounded-2xl flex items-center justify-center overflow-hidden border-primary/20 group"
             initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
           >
-            {/* Glow effect on hover */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            {/* Glowing background gradient that brightens on hover */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
             
-            <div className="flex-grow flex items-center justify-center relative z-10 w-full mb-8">
-              {/* Dark Mode Logo (White) */}
-              <div className="hidden dark:block">
-                <Image 
-                  src="/logos/hyzerox-white.png" 
-                  alt="HyzerOX" 
-                  width={240} 
-                  height={60} 
-                  className="object-contain" 
-                  priority 
-                />
-              </div>
-              {/* Light Mode Logo (Black) */}
-              <div className="block dark:hidden">
-                <Image 
-                  src="/logos/hyzerox-black.png" 
-                  alt="HyzerOX" 
-                  width={240} 
-                  height={60} 
-                  className="object-contain" 
-                  priority 
-                />
-              </div>
-            </div>
+            {/* Dark Mode Logo */}
+            <img 
+              src="/logos/hyzerox-white.png" 
+              alt="HyzerOX" 
+              className="w-4/5 max-w-[300px] object-contain hidden dark:block drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] group-hover:scale-105 transition-transform duration-700 relative z-10" 
+            />
             
-            <div className="relative z-10 text-center">
-              <h3 className="font-heading text-xl font-bold mb-3 text-textMain group-hover:text-primary transition-colors">The Ultimate Performance Engine.</h3>
-              <p className="text-textMuted text-sm leading-relaxed max-w-sm">Born from a passion for code and gaming, Forged for the Extreme. This infrastructure is a direct reflection of our dedication.</p>
-            </div>
+            {/* Light Mode Logo */}
+            <img 
+              src="/logos/hyzerox-black.png" 
+              alt="HyzerOX" 
+              className="w-4/5 max-w-[300px] object-contain block dark:hidden drop-shadow-[0_0_30px_rgba(0,0,0,0.1)] group-hover:scale-105 transition-transform duration-700 relative z-10" 
+            />
           </motion.div>
         </div>
       </section>
@@ -222,12 +201,11 @@ export default function Home() {
       </section>
 
       {/* 6. BOTTOM CTA BANNER */}
-      <section className="w-full max-w-5xl mx-auto px-6 pb-24">
+      <section className="w-full max-w-5xl mx-auto px-6 pb-20">
         <motion.div 
           className="relative rounded-2xl p-[1px] overflow-hidden group"
           initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
         >
-          {/* Animated Gradient Border */}
           <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
           
           <div className="relative bg-surface rounded-2xl p-10 md:p-16 text-center flex flex-col items-center justify-center z-10">
@@ -240,28 +218,16 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* 7. NEW POWERED BY SECTION (Add Powered by HyzerOX Team & DZD) */}
-      <section className="w-full max-w-7xl mx-auto px-6 pb-24 text-center">
-        <motion.div 
-          className="text-center"
-          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-        >
-          <div className="inline-flex items-center gap-4 bg-surface border border-border px-6 py-3 rounded-full text-textMain font-medium shadow-lg hover:border-primary/50 transition-colors group">
-            <div className="flex items-center gap-2 text-primary">
-              <Users className="w-5 h-5" />
-              <span>HyzerOX Team</span>
-            </div>
-            <span className="text-border">|</span>
-            <div className="flex items-center gap-2 text-primary">
-              <Code className="w-5 h-5" />
-              <span>DZD</span>
-            </div>
-            <p className="text-textMuted text-sm pl-2">Engineered & Developed</p>
-          </div>
-        </motion.div>
-      </section>
+      {/* 7. CUSTOM FOOTER WITH REQUESTED TEXT */}
+      <footer className="w-full border-t border-border py-8 text-center mt-auto">
+        <div className="max-w-7xl mx-auto px-6">
+          <p className="text-textMuted font-bold tracking-wide">
+            Powered by HyzerOX Team & DZD
+          </p>
+        </div>
+      </footer>
 
     </div>
   );
-                      }
-                
+          }
+              

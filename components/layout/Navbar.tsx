@@ -35,10 +35,10 @@ export default function Navbar() {
         
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          {/* Dark Mode Logo (White text/icon) */}
+          {/* Dark Mode Logo (White logo) */}
           <div className="hidden dark:block">
             <Image 
-              src="/logos/hyzerox-white.png" 
+              src="/public/logos/hyzerox-white.png" 
               alt="HyzerOX" 
               width={160} 
               height={40} 
@@ -46,10 +46,10 @@ export default function Navbar() {
               priority 
             />
           </div>
-          {/* Light Mode Logo (Black text/icon) */}
+          {/* Light Mode Logo (Black logo) */}
           <div className="block dark:hidden">
             <Image 
-              src="/logos/hyzerox-black.png" 
+              src="/public/logos/hyzerox-black.png" 
               alt="HyzerOX" 
               width={160} 
               height={40} 
@@ -116,4 +116,5 @@ export default function Navbar() {
       </AnimatePresence>
     </header>
   );
-}
+              }
+            

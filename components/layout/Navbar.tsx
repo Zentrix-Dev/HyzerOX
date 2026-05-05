@@ -36,13 +36,13 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-2">
           {/* Dark Mode Logo */}
           <img 
-            src="/logos/hyzerox-white.png" 
+            src="/logos/hyzerox-black.png" 
             alt="HyzerOX" 
             className="h-8 w-auto hidden dark:block object-contain" 
           />
           {/* Light Mode Logo */}
           <img 
-            src="/logos/hyzerox-black.png" 
+            src="/logos/hyzerox-white.png" 
             alt="HyzerOX" 
             className="h-8 w-auto block dark:hidden object-contain" 
           />

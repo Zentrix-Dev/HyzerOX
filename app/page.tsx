@@ -1,9 +1,10 @@
 "use client";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { Server, Cuboid, Bot, Gamepad2, Shield, Zap, ArrowRight, Globe } from "lucide-react";
+import { Server, Cuboid, Bot, Gamepad2, Shield, Zap, ArrowRight, Globe, MessageSquare, X, Send } from "lucide-react";
 
-// Animation Variants for staggering
+// Animation Variants
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -18,12 +19,21 @@ const itemVariants = {
 };
 
 export default function Home() {
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [chatMessage, setChatMessage] = useState("");
+
+  const handleSendMessage = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!chatMessage.trim()) return;
+    // Chat logic would go here
+    setChatMessage("");
+  };
+
   return (
     <div className="flex flex-col items-center overflow-hidden">
       
       {/* 1. HERO SECTION */}
       <section className="w-full max-w-7xl mx-auto px-6 py-24 md:py-32 text-center relative min-h-[70vh] flex flex-col justify-center">
-        {/* Animated Watermark */}
         <motion.div 
           className="absolute inset-0 z-[-1] flex items-center justify-center pointer-events-none opacity-[0.03] dark:opacity-5"
           animate={{ rotate: 360, scale: [1, 1.05, 1] }}
@@ -68,7 +78,6 @@ export default function Home() {
             Powered By
           </p>
           
-          {/* Infinite Marquee Container */}
           <div 
             className="relative flex overflow-hidden w-full"
             style={{ WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)", maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)" }}
@@ -129,7 +138,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* 4. GLOBAL NETWORK / BRAND GRAPHIC SECTION */}
+      {/* 4. GLOBAL NETWORK / LOGO GRAPHIC */}
       <section className="w-full bg-elevated/50 border-y border-border py-24">
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
@@ -153,24 +162,21 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Replaced Globe with Dynamic Theme Logo */}
+          {/* Dynamic Theme Logo */}
           <motion.div 
             className="relative h-[400px] glass-panel rounded-2xl flex items-center justify-center overflow-hidden border-primary/20 group"
             initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
           >
-            {/* Glowing background gradient that brightens on hover */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
             
-            {/* Dark Mode Logo */}
             <img 
-              src="/logos/hyzerox-white.png" 
+              src="/logos/hyzerox-black.png" 
               alt="HyzerOX" 
               className="w-4/5 max-w-[300px] object-contain hidden dark:block drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] group-hover:scale-105 transition-transform duration-700 relative z-10" 
             />
             
-            {/* Light Mode Logo */}
             <img 
-              src="/logos/hyzerox-black.png" 
+              src="/logos/hyzerox-white.png" 
               alt="HyzerOX" 
               className="w-4/5 max-w-[300px] object-contain block dark:hidden drop-shadow-[0_0_30px_rgba(0,0,0,0.1)] group-hover:scale-105 transition-transform duration-700 relative z-10" 
             />
@@ -218,16 +224,66 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* 7. CUSTOM FOOTER WITH REQUESTED TEXT */}
-      <footer className="w-full border-t border-border py-8 text-center mt-auto">
-        <div className="max-w-7xl mx-auto px-6">
-          <p className="text-textMuted font-bold tracking-wide">
-            Powered by HyzerOX Team & DZD
-          </p>
-        </div>
-      </footer>
+      {/* NEXARA CHATBOT WIDGET */}
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        <AnimatePresence>
+          {isChatOpen && (
+            <motion.div 
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className="mb-4 w-80 bg-surface border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col"
+            >
+              {/* Chat Header */}
+              <div className="bg-primary px-4 py-3 flex items-center justify-between">
+                <div className="flex items-center gap-2 text-background">
+                  <Bot className="w-5 h-5" />
+                  <span className="font-bold">Nexara</span>
+                </div>
+                <button onClick={() => setIsChatOpen(false)} className="text-background/80 hover:text-background transition-colors">
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Chat Body */}
+              <div className="h-64 p-4 overflow-y-auto flex flex-col gap-3 bg-surface">
+                <div className="bg-elevated text-textMain text-sm p-3 rounded-xl rounded-tl-sm w-[85%]">
+                  Hi there! I'm Nexara, your HyzerOX AI assistant. How can I help you forge your infrastructure today?
+                </div>
+              </div>
+
+              {/* Chat Input */}
+              <div className="p-3 border-t border-border bg-surface">
+                <form onSubmit={handleSendMessage} className="flex items-center gap-2 relative">
+                  <input 
+                    type="text" 
+                    value={chatMessage}
+                    onChange={(e) => setChatMessage(e.target.value)}
+                    placeholder="Type a message..." 
+                    className="w-full bg-elevated border border-border text-textMain text-sm rounded-full pl-4 pr-10 py-2 focus:outline-none focus:border-primary transition-colors"
+                  />
+                  <button type="submit" className="absolute right-2 p-1.5 bg-primary text-background rounded-full hover:scale-105 transition-transform">
+                    <Send className="w-3 h-3" />
+                  </button>
+                </form>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Floating Toggle Button */}
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => setIsChatOpen(!isChatOpen)}
+          className="w-14 h-14 bg-primary text-background rounded-full flex items-center justify-center shadow-[0_0_20px_var(--accent-primary)] hover:shadow-[0_0_30px_var(--accent-primary)] transition-shadow"
+        >
+          {isChatOpen ? <X className="w-6 h-6" /> : <MessageSquare className="w-6 h-6" />}
+        </motion.button>
+      </div>
 
     </div>
   );
           }
-              
+        

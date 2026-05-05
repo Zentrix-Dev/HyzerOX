@@ -38,9 +38,9 @@ export default function Home() {
           </motion.div>
           
           <motion.h1 variants={itemVariants} className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-textMain tracking-tight">
-            Forge Your <br className="hidden md:block" />
+            Unrivaled Server <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-              Infrastructure.
+              Performance.
             </span>
           </motion.h1>
           

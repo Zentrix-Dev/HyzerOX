@@ -1,7 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Server, Cuboid, Bot, Gamepad2, Shield, Zap, Globe, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { Server, Cuboid, Bot, Gamepad2, Shield, Zap, Globe, ArrowRight, Code, Users } from "lucide-react";
 
 // Animation Variants for staggering
 const containerVariants = {
@@ -38,9 +39,9 @@ export default function Home() {
           </motion.div>
           
           <motion.h1 variants={itemVariants} className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-textMain tracking-tight">
-            Unrivaled Server <br className="hidden md:block" />
+            Forge Your <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-              Performance.
+              Infrastructure.
             </span>
           </motion.h1>
           
@@ -156,17 +157,44 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Abstract Map Graphic */}
+          {/* AbstractMap Graphic (Removed) */}
+          {/* HyzerOX Logo Panel (New) */}
           <motion.div 
-            className="relative h-[400px] glass-panel rounded-2xl flex items-center justify-center overflow-hidden border-primary/20"
+            className="relative rounded-2xl p-10 flex flex-col items-center justify-center h-[400px] overflow-hidden glass-panel group transition-all duration-300 hover:border-primary/50 hover:-translate-y-2 hover:shadow-xl"
             initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
           >
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
-            <Globe className="w-64 h-64 text-primary/20 animate-[spin_60s_linear_infinite]" />
-            {/* Simulated Server Nodes */}
-            <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-primary rounded-full shadow-[0_0_15px_var(--accent-primary)] animate-pulse" />
-            <div className="absolute bottom-1/3 right-1/4 w-3 h-3 bg-secondary rounded-full shadow-[0_0_15px_var(--accent-secondary)] animate-pulse delay-75" />
-            <div className="absolute top-1/2 right-1/3 w-3 h-3 bg-primary rounded-full shadow-[0_0_15px_var(--accent-primary)] animate-pulse delay-150" />
+            {/* Glow effect on hover */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            
+            <div className="flex-grow flex items-center justify-center relative z-10 w-full mb-8">
+              {/* Dark Mode Logo (White) */}
+              <div className="hidden dark:block">
+                <Image 
+                  src="/logos/hyzerox-white.png" 
+                  alt="HyzerOX" 
+                  width={240} 
+                  height={60} 
+                  className="object-contain" 
+                  priority 
+                />
+              </div>
+              {/* Light Mode Logo (Black) */}
+              <div className="block dark:hidden">
+                <Image 
+                  src="/logos/hyzerox-black.png" 
+                  alt="HyzerOX" 
+                  width={240} 
+                  height={60} 
+                  className="object-contain" 
+                  priority 
+                />
+              </div>
+            </div>
+            
+            <div className="relative z-10 text-center">
+              <h3 className="font-heading text-xl font-bold mb-3 text-textMain group-hover:text-primary transition-colors">The Ultimate Performance Engine.</h3>
+              <p className="text-textMuted text-sm leading-relaxed max-w-sm">Born from a passion for code and gaming, Forged for the Extreme. This infrastructure is a direct reflection of our dedication.</p>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -194,7 +222,7 @@ export default function Home() {
       </section>
 
       {/* 6. BOTTOM CTA BANNER */}
-      <section className="w-full max-w-5xl mx-auto px-6 pb-32">
+      <section className="w-full max-w-5xl mx-auto px-6 pb-24">
         <motion.div 
           className="relative rounded-2xl p-[1px] overflow-hidden group"
           initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
@@ -212,7 +240,28 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* 7. NEW POWERED BY SECTION (Add Powered by HyzerOX Team & DZD) */}
+      <section className="w-full max-w-7xl mx-auto px-6 pb-24 text-center">
+        <motion.div 
+          className="text-center"
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
+        >
+          <div className="inline-flex items-center gap-4 bg-surface border border-border px-6 py-3 rounded-full text-textMain font-medium shadow-lg hover:border-primary/50 transition-colors group">
+            <div className="flex items-center gap-2 text-primary">
+              <Users className="w-5 h-5" />
+              <span>HyzerOX Team</span>
+            </div>
+            <span className="text-border">|</span>
+            <div className="flex items-center gap-2 text-primary">
+              <Code className="w-5 h-5" />
+              <span>DZD</span>
+            </div>
+            <p className="text-textMuted text-sm pl-2">Engineered & Developed</p>
+          </div>
+        </motion.div>
+      </section>
+
     </div>
   );
-          }
-          
+                      }
+                

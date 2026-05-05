@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
@@ -35,28 +34,18 @@ export default function Navbar() {
         
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          {/* Dark Mode Logo (White logo) */}
-          <div className="hidden dark:block">
-            <Image 
-              src="/public/logos/hyzerox-white.png" 
-              alt="HyzerOX" 
-              width={160} 
-              height={40} 
-              className="object-contain h-8 w-auto" 
-              priority 
-            />
-          </div>
-          {/* Light Mode Logo (Black logo) */}
-          <div className="block dark:hidden">
-            <Image 
-              src="/public/logos/hyzerox-black.png" 
-              alt="HyzerOX" 
-              width={160} 
-              height={40} 
-              className="object-contain h-8 w-auto" 
-              priority 
-            />
-          </div>
+          {/* Dark Mode Logo */}
+          <img 
+            src="/public/logos/hyzerox-white.png" 
+            alt="HyzerOX" 
+            className="h-8 w-auto hidden dark:block object-contain" 
+          />
+          {/* Light Mode Logo */}
+          <img 
+            src="/public/logos/hyzerox-black.png" 
+            alt="HyzerOX" 
+            className="h-8 w-auto block dark:hidden object-contain" 
+          />
         </Link>
 
         {/* Desktop Nav */}
@@ -68,7 +57,7 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Right Actions */}
+        {/* Desktop Right Actions */}
         <div className="hidden md:flex items-center gap-4">
           <select 
             value={currency} 
@@ -93,8 +82,8 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Mobile Toggle */}
-        <button className="md:hidden p-2 text-textMain" onClick={() => setMobileOpen(!mobileOpen)}>
+        {/* Mobile Toggle Button */}
+        <button className="md:hidden p-2 text-textMain" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle Menu">
           {mobileOpen ? <X /> : <Menu />}
         </button>
       </div>
@@ -111,10 +100,36 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+            
+            {/* Mobile Controls (Theme & Currency) */}
+            <div className="flex items-center justify-between pt-6 mt-2 border-t border-border">
+              <div className="flex items-center gap-3">
+                <span className="text-sm font-medium text-textMuted">Currency:</span>
+                <select 
+                  value={currency} 
+                  onChange={(e) => setCurrency(e.target.value)}
+                  className="bg-elevated text-sm font-medium text-textMain border border-border rounded-md px-2 py-1 outline-none"
+                >
+                  {["USD", "EUR", "GBP", "INR", "CAD", "AUD"].map(c => <option key={c} value={c}>{c}</option>)}
+                </select>
+              </div>
+
+              {mounted && (
+                <button 
+                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")} 
+                  className="flex items-center gap-2 px-3 py-2 bg-elevated rounded-md border border-border text-textMain text-sm font-medium"
+                >
+                  {theme === "dark" ? <><Sun className="w-4 h-4" /> Light Mode</> : <><Moon className="w-4 h-4" /> Dark Mode</>}
+                </button>
+              )}
+            </div>
+
+            <Link href="/pricing" onClick={() => setMobileOpen(false)} className="mt-2 w-full text-center bg-primary hover:bg-opacity-80 text-background py-3 rounded-md font-semibold transition-all">
+              Get Started
+            </Link>
           </motion.div>
         )}
       </AnimatePresence>
     </header>
   );
-              }
-            
+}
